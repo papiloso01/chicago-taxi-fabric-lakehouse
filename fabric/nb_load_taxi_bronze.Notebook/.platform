@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_load_taxi_bronze",
+    "description": "Verified landing run merged into bronze.taxi_trips"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e2d8c500-1a53-5729-819a-bb8041f1c3ca"
+  }
+}

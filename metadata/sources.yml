@@ -1,0 +1,11 @@
+version: 1
+sources:
+- name: taxi_trips
+  endpoint: https://data.cityofchicago.org/resource/ajtu-isnz.json
+  natural_key: trip_id
+  timezone: America/Chicago
+  initial_load: completed_calendar_year
+  daily_window: T-1
+  bounds: inclusive_start_exclusive_end
+  landing: /lakehouse/default/Files/landing/taxi_trips/run_id=<32 hex>
+  status: implemented_pending_fabric_test

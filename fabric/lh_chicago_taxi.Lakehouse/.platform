@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Lakehouse",
+    "displayName": "lh_chicago_taxi",
+    "description": "Landing files plus bronze, silver and gold Delta schemas"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0ebf4156-1e38-5ae5-a9f3-e9d642511a07"
+  }
+}
