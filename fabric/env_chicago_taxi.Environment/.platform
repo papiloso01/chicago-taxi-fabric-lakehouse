@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Environment",
+    "displayName": "env_chicago_taxi",
+    "description": "Fabric Runtime 1.3 with the chicago_taxi_fabric wheel"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3764ffaa-ce58-56d1-a48f-eac036d6fda3"
+  }
+}

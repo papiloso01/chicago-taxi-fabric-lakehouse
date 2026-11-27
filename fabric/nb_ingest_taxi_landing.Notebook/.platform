@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_ingest_taxi_landing",
+    "description": "Taxi API to immutable OneLake landing files"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3e94be7a-c744-5d68-a4ca-f384444c164c"
+  }
+}

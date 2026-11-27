@@ -1,0 +1,214 @@
+{
+  "properties": {
+    "description": "Taxi API -> landing -> bronze -> silver -> gold. No schedule is attached in source control.",
+    "activities": [
+      {
+        "name": "ingest_taxi_landing",
+        "type": "TridentNotebook",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.04:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "3e94be7a-c744-5d68-a4ca-f384444c164c",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "mode": {
+              "value": {
+                "value": "@pipeline().parameters.mode",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "start": {
+              "value": {
+                "value": "@pipeline().parameters.start",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "end": {
+              "value": {
+                "value": "@pipeline().parameters.end",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "year": {
+              "value": {
+                "value": "@pipeline().parameters.year",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "page_size": {
+              "value": {
+                "value": "@pipeline().parameters.page_size",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "landing_root": {
+              "value": {
+                "value": "@pipeline().parameters.landing_root",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "landing_run_id": {
+              "value": {
+                "value": "@toLower(replace(pipeline().RunId, '-', ''))",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "name": "load_taxi_bronze",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "ingest_taxi_landing",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.04:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "e2d8c500-1a53-5729-819a-bb8041f1c3ca",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "landing_root": {
+              "value": {
+                "value": "@pipeline().parameters.landing_root",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "landing_run_id": {
+              "value": {
+                "value": "@toLower(replace(pipeline().RunId, '-', ''))",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "lakehouse": {
+              "value": {
+                "value": "@pipeline().parameters.lakehouse",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "name": "build_taxi_silver",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "load_taxi_bronze",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.04:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "00c9aa86-0a16-59ad-be5c-c9ef270a41eb",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "lakehouse": {
+              "value": {
+                "value": "@pipeline().parameters.lakehouse",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        }
+      },
+      {
+        "name": "build_taxi_gold",
+        "type": "TridentNotebook",
+        "dependsOn": [
+          {
+            "activity": "build_taxi_silver",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ],
+        "policy": {
+          "timeout": "0.04:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
+        "typeProperties": {
+          "notebookId": "79bfcbad-8c5e-503b-be69-76ff3b141a08",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "lakehouse": {
+              "value": {
+                "value": "@pipeline().parameters.lakehouse",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "mode": {
+        "type": "string",
+        "defaultValue": "daily"
+      },
+      "start": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "end": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "year": {
+        "type": "string",
+        "defaultValue": ""
+      },
+      "page_size": {
+        "type": "string",
+        "defaultValue": "5000"
+      },
+      "landing_root": {
+        "type": "string",
+        "defaultValue": "/lakehouse/default/Files/landing"
+      },
+      "lakehouse": {
+        "type": "string",
+        "defaultValue": "lh_chicago_taxi"
+      }
+    }
+  }
+}

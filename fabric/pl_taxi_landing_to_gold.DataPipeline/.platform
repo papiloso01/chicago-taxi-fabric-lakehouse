@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_taxi_landing_to_gold",
+    "description": "Four-stage taxi ETL orchestration"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "4ea9bd1a-905c-5c4f-b814-cdc9a6dcfa13"
+  }
+}

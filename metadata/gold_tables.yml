@@ -1,0 +1,35 @@
+version: 1
+layer: gold
+status: implemented_pending_fabric_test
+publication: full snapshot from a pinned silver fact version; mart_loads audit; Direct Lake semantic model reads these tables
+tables:
+- name: lh_chicago_taxi.gold.mart_daily_summary
+  format: delta
+  key:
+  - trip_date
+  grain: one row per trip_date
+  schema_sql: 'trip_date DATE, trip_count BIGINT, revenue_trip_count BIGINT, known_revenue_usd DECIMAL(28,2),
+
+    distance_trip_count BIGINT, total_km DECIMAL(28,6), revenue_coverage DOUBLE, distance_coverage DOUBLE, gold_load_id STRING'
+- name: lh_chicago_taxi.gold.mart_area_demand_daily
+  format: delta
+  key:
+  - trip_date
+  - area_role
+  - area_key
+  grain: one row per trip_date, area_role, area_key
+  schema_sql: 'trip_date DATE, area_role STRING, area_key INT, area_id INT, is_unknown BOOLEAN, trip_count BIGINT, revenue_trip_count
+    BIGINT, known_revenue_usd DECIMAL(28,2),
+
+    distance_trip_count BIGINT, total_km DECIMAL(28,6), revenue_coverage DOUBLE, distance_coverage DOUBLE, gold_load_id STRING'
+- name: lh_chicago_taxi.gold.mart_company_payment_daily
+  format: delta
+  key:
+  - trip_date
+  - company_key
+  - payment_type_key
+  grain: one row per trip_date, company_key, payment_type_key
+  schema_sql: 'trip_date DATE, company_key STRING, company_name STRING, payment_type_key STRING, payment_type STRING, trip_count
+    BIGINT, revenue_trip_count BIGINT, known_revenue_usd DECIMAL(28,2),
+
+    distance_trip_count BIGINT, total_km DECIMAL(28,6), revenue_coverage DOUBLE, distance_coverage DOUBLE, gold_load_id STRING'

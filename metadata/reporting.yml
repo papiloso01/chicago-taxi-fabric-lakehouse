@@ -1,0 +1,10 @@
+version: 1
+status: implemented_pending_fabric_test
+rules:
+  vehicle_identity: Taxi IDs identify vehicles, not drivers.
+  revenue: Reported trip total in USD, not profit.
+  distance: Reported miles multiplied by 1.609344.
+  gender: Not available in source; do not infer.
+  area_activity: Pickup and dropoff counted separately; summing both doubles activity counts.
+  coverage: Missing revenue/distance stays null; publish known-value counts and coverage.
+  unknown_geography: Missing or invalid community areas map to area_key 0; trips are retained.

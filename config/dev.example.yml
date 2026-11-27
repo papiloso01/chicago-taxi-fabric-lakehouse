@@ -1,0 +1,9 @@
+# Copy to config/dev.local.yml (git-ignored) and fill in your own values. No secrets here.
+environment: dev
+capacity_region: uksouth
+workspace: ws-chicago-taxi-dev
+lakehouse: lh_chicago_taxi
+environment_item: env_chicago_taxi
+landing_root: /lakehouse/default/Files/landing
+pipeline: pl_taxi_landing_to_gold
+key_vault_uri: null  # Optional: Key Vault holding the Socrata app token

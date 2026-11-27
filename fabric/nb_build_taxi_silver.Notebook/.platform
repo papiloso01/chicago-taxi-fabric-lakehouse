@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_build_taxi_silver",
+    "description": "Pinned bronze snapshot to silver facts, dimensions and quarantine"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "00c9aa86-0a16-59ad-be5c-c9ef270a41eb"
+  }
+}
